@@ -1,0 +1,23 @@
+{
+  "name": "cybertrace-x",
+  "version": "1.0.0",
+  "description": "CyberTrace-X: An AI-Powered Multimodal Cybercrime Investigation & Intelligence Framework",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "build:client": "npm --prefix client run build",
+    "build": "npm --prefix client install && npm --prefix client run build && npm --prefix server install --omit=dev",
+    "start": "npm --prefix server start",
+    "dev": "node server/server.js"
+  },
+  "keywords": [
+    "cybercrime",
+    "forensics",
+    "investigation",
+    "intelligence",
+    "knowledge-graph",
+    "multimodal-evidence",
+    "ai-agent"
+  ],
+  "author": "CyberTrace-X Framework Team",
+  "license": "ISC"
+}

@@ -1,0 +1,339 @@
+{
+  "systemMetrics": {
+    "totalCases": 1248,
+    "linkedCases": 862,
+    "highRiskCases": 187,
+    "entitiesExtracted": 15732,
+    "avgRiskScore": 78,
+    "linkageAccuracy": "95%",
+    "manualEffortReduction": "70%"
+  },
+  "riskDistribution": {
+    "high": { "count": 187, "percentage": 15, "range": "70-100", "label": "High" },
+    "medium": { "count": 512, "percentage": 41, "range": "40-69", "label": "Medium" },
+    "low": { "count": 549, "percentage": 44, "range": "0-39", "label": "Low" }
+  },
+  "topEntities": [
+    { "type": "Phone Numbers", "count": 4562, "category": "Telecom", "riskLevel": "High", "icon": "phone" },
+    { "type": "Bank Accounts", "count": 2164, "category": "Financial", "riskLevel": "Critical", "icon": "landmark" },
+    { "type": "UPI IDs", "count": 1298, "category": "Payment", "riskLevel": "Critical", "icon": "smartphone" },
+    { "type": "Email IDs", "count": 1102, "category": "Digital ID", "riskLevel": "Medium", "icon": "mail" },
+    { "type": "IP Addresses", "count": 966, "category": "Network", "riskLevel": "High", "icon": "globe" }
+  ],
+  "recentAlerts": [
+    {
+      "id": "alt-1",
+      "type": "HIGH_RISK_TX",
+      "title": "High-risk transaction detected",
+      "timeAgo": "2 min ago",
+      "severity": "critical",
+      "description": "Rapid siphon of ₹2,45,000 into flagged mule account 123456789012 from Delhi IP."
+    },
+    {
+      "id": "alt-2",
+      "type": "CASE_LINKED",
+      "title": "New similar case linked",
+      "timeAgo": "5 min ago",
+      "severity": "warning",
+      "description": "Case #126 matched with Case #104 & #117 via shared mule A/C 123456789012 (98% confidence)."
+    },
+    {
+      "id": "alt-3",
+      "type": "UNUSUAL_LOGIN",
+      "title": "Unusual login pattern detected",
+      "timeAgo": "12 min ago",
+      "severity": "info",
+      "description": "Simultaneous victim credential submissions recorded from IP subnet 185.220.101.x."
+    },
+    {
+      "id": "alt-4",
+      "type": "PHISHING_DETECTED",
+      "title": "Potential phishing site identified",
+      "timeAgo": "15 min ago",
+      "severity": "warning",
+      "description": "Domain sbi-kyc-verify-portal.in flagged in active phishing SMS campaign."
+    }
+  ],
+  "cases": [
+    {
+      "id": "104",
+      "caseNumber": "Case #104",
+      "title": "NetBanking KYC Expiry Phishing & Unauthorized Siphon",
+      "crimeType": "Phishing & Banking Fraud",
+      "status": "Active Investigation",
+      "riskScore": 88,
+      "riskTier": "HIGH",
+      "financialLoss": 245000,
+      "location": "New Delhi, Delhi",
+      "complainant": "Rajesh Sharma",
+      "incidentDate": "2026-03-24T10:01:00Z",
+      "investigatingOfficer": "Insp. Vikram Singh (Cyber Crime Unit)",
+      "legalSections": ["IT Act Sec 66C", "IT Act Sec 66D", "BNS Sec 318(4)"],
+      "description": "Victim received an urgent SMS purportedly from State Bank alert desk claiming KYC expired. Clicked phishing portal sbi-kyc-verify-portal.in, entered NetBanking credentials and OTP. ₹2,45,000 siphoned via UPI/IMPS to mule account 123456789012 (abc@upi).",
+      "evidenceText": "Phishing SMS from +91-9876543210. Link: https://sbi-kyc-verify-portal.in. Destination Bank A/C: 123456789012. UPI: abc@upi. Threat actor login IP: 185.220.101.5. Amount: ₹2,45,000.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012"],
+        "upiIds": ["abc@upi"],
+        "emails": ["sbi-alert@support-portal.net"],
+        "ipAddresses": ["185.220.101.5"],
+        "urls": ["https://sbi-kyc-verify-portal.in"],
+        "cryptoWallets": [],
+        "amounts": [245000],
+        "ifscCodes": ["SBIN0004321"]
+      },
+      "timeline": [
+        { "stepNumber": 1, "phase": "Initial Contact", "title": "Phishing SMS Received", "timestamp": "10:01 AM", "description": "Victim received SMS claiming KYC suspension with deceptive link.", "actor": "Threat Actor", "evidenceSnippet": "Sender: +919876543210 (AX-SBISEC)", "severity": "MEDIUM" },
+        { "stepNumber": 2, "phase": "Delivery & Lure", "title": "Fake Bank Link Opened", "timestamp": "10:18 AM", "description": "Victim accessed cloned phishing portal on mobile browser.", "actor": "Victim (Deceived)", "evidenceSnippet": "https://sbi-kyc-verify-portal.in", "severity": "HIGH" },
+        { "stepNumber": 3, "phase": "Credential Theft", "title": "Credential Theft & OTP Harvest", "timestamp": "10:25 AM", "description": "Victim entered credentials and dynamic OTP intercepted by reverse proxy.", "actor": "Threat Infrastructure", "evidenceSnippet": "Exfiltration Server: 185.220.101.5", "severity": "CRITICAL" },
+        { "stepNumber": 4, "phase": "Unauthorized Transaction", "title": "Money Transfer / UPI Fraud", "timestamp": "10:33 AM", "description": "Unauthorized transfer of ₹2,45,000 executed to primary mule A/C.", "actor": "Scammer Syndicate", "evidenceSnippet": "UTR: UPI/409823149812 to A/C 123456789012 (abc@upi)", "severity": "CRITICAL" },
+        { "stepNumber": 5, "phase": "Laundering & Cash-Out", "title": "Rapid ATM Cash-Out", "timestamp": "10:48 AM", "description": "Withdrawal of ₹50,000 from ATM in Jamtara; remainder layered.", "actor": "Mule Operator", "evidenceSnippet": "ATM Tx ID #99281 in Jamtara", "severity": "CRITICAL" }
+      ],
+      "linkedCases": [
+        {
+          "targetCaseId": "117",
+          "targetCaseNumber": "Case #117",
+          "targetTitle": "UPI QR Scam - Defense Personnel Impersonation",
+          "similarityScore": 0.96,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012", "Direct UPI ID Match: abc@upi", "Shared Calling Phone: +919876543210"]
+        },
+        {
+          "targetCaseId": "126",
+          "targetCaseNumber": "Case #126",
+          "targetTitle": "Telegram Work-From-Home Task Investment Fraud",
+          "similarityScore": 0.89,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012", "Identical Origin IP: 185.220.101.5"]
+        }
+      ]
+    },
+    {
+      "id": "117",
+      "caseNumber": "Case #117",
+      "title": "UPI QR Scam - Defense Personnel Impersonation",
+      "crimeType": "OLX / Impersonation Fraud",
+      "status": "Active Investigation",
+      "riskScore": 84,
+      "riskTier": "HIGH",
+      "financialLoss": 115000,
+      "location": "Mumbai, Maharashtra",
+      "complainant": "Pooja Verma",
+      "incidentDate": "2026-03-24T14:30:00Z",
+      "investigatingOfficer": "Insp. Ramesh Patil (Cyber Cell Mumbai)",
+      "legalSections": ["IT Act Sec 66D", "BNS Sec 318(4)", "BNS Sec 319"],
+      "description": "Complainant listed furniture on OLX. Suspect posed as an Army officer transferring out of station. Suspect sent a malicious QR code claiming 'scan to receive advance payment', draining ₹1,15,000 from victim's account to abc@upi and A/C 123456789012.",
+      "evidenceText": "Contacted by +91-9876543210 using fake Army ID card. Sent QR code tied to UPI ID abc@upi. Funds credited to Account: 123456789012. Amount: ₹1,15,000.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012"],
+        "upiIds": ["abc@upi"],
+        "emails": ["army-canteen-dept@mail.com"],
+        "ipAddresses": ["185.220.101.8"],
+        "urls": [],
+        "cryptoWallets": [],
+        "amounts": [115000],
+        "ifscCodes": ["SBIN0004321"]
+      },
+      "timeline": [
+        { "stepNumber": 1, "phase": "Initial Contact", "title": "OLX Buyer Message & WhatsApp Voice Call", "timestamp": "02:30 PM", "description": "Suspect called posing as military officer willing to pay without bargaining.", "actor": "Threat Actor", "evidenceSnippet": "Phone: +919876543210", "severity": "MEDIUM" },
+        { "stepNumber": 2, "phase": "Delivery & Lure", "title": "Fake Advance Payment QR Code Shared", "timestamp": "02:45 PM", "description": "Scammer sent QR code claiming scan is mandatory to approve inbound defense credit.", "actor": "Threat Actor", "evidenceSnippet": "WhatsApp QR image payload", "severity": "HIGH" },
+        { "stepNumber": 3, "phase": "Credential / PIN Capture", "title": "UPI PIN Entered by Victim", "timestamp": "02:51 PM", "description": "Victim entered secret UPI MPIN under false belief that payment would be received.", "actor": "Victim (Deceived)", "evidenceSnippet": "UPI Intent Gateway authorization", "severity": "CRITICAL" },
+        { "stepNumber": 4, "phase": "Unauthorized Transaction", "title": "Debit of ₹1,15,000 to Mule A/C", "timestamp": "02:54 PM", "description": "Immediate debit to abc@upi backed by State Bank A/C 123456789012.", "actor": "Scammer Syndicate", "evidenceSnippet": "Bank UTR: 409849201948", "severity": "CRITICAL" }
+      ],
+      "linkedCases": [
+        {
+          "targetCaseId": "104",
+          "targetCaseNumber": "Case #104",
+          "targetTitle": "NetBanking KYC Expiry Phishing & Unauthorized Siphon",
+          "similarityScore": 0.96,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012", "Direct UPI ID Match: abc@upi", "Shared Calling Phone: +919876543210"]
+        },
+        {
+          "targetCaseId": "126",
+          "targetCaseNumber": "Case #126",
+          "targetTitle": "Telegram Work-From-Home Task Investment Fraud",
+          "similarityScore": 0.85,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012"]
+        }
+      ]
+    },
+    {
+      "id": "126",
+      "caseNumber": "Case #126",
+      "title": "Telegram Work-From-Home Task Investment Fraud",
+      "crimeType": "Investment & Task Scam",
+      "status": "Under Forensic Audit",
+      "riskScore": 92,
+      "riskTier": "HIGH",
+      "financialLoss": 480000,
+      "location": "Bengaluru, Karnataka",
+      "complainant": "Suresh Nair",
+      "incidentDate": "2026-03-23T11:15:00Z",
+      "investigatingOfficer": "ACP K. Swamy (CID Cyber Division)",
+      "legalSections": ["IT Act Sec 66D", "BNS Sec 318(4)", "BNS Sec 111 (Organized Crime)"],
+      "description": "Victim added to Telegram channel promising high returns for rating hotels and YouTube videos. Initial small payouts were returned to gain trust. Victim was lured to invest ₹4,80,000 into VIP tier, deposited into Account 123456789012. Platform locked withdrawals.",
+      "evidenceText": "Telegram admin @invest_vip_global routed deposits to Mule Bank Account: 123456789012. Server IP for fake dashboard: 185.220.101.5. Amount: ₹4,80,000. Phone: +91-9876543210.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012"],
+        "upiIds": ["vipinvest@okhdfcbank"],
+        "emails": ["vip-manager@telegram-task.io"],
+        "ipAddresses": ["185.220.101.5"],
+        "urls": ["https://task-vip-earn.top"],
+        "cryptoWallets": ["0x71C8363820912BF821389028198301823901949b"],
+        "amounts": [480000],
+        "ifscCodes": ["SBIN0004321"]
+      },
+      "timeline": [
+        { "stepNumber": 1, "phase": "Initial Contact", "title": "Telegram Group Invitation", "timestamp": "09:00 AM", "description": "Victim invited to 'Part-Time Rating Tasks' group showcasing forged profit screenshots.", "actor": "Threat Syndicate", "evidenceSnippet": "Telegram ID: @invest_vip_global", "severity": "MEDIUM" },
+        { "stepNumber": 2, "phase": "Bait & Trust Building", "title": "Micro-Tasks with Small Payouts", "timestamp": "10:15 AM", "description": "Victim earned ₹1,200 on first two tasks to build false confidence.", "actor": "Adversary", "evidenceSnippet": "Credited ₹1,200 from test UPI account", "severity": "MEDIUM" },
+        { "stepNumber": 3, "phase": "High-Value Lure", "title": "Crypto & Bank Investment Escalation", "timestamp": "11:30 AM", "description": "Promised 40% instant bonus for deposit into VIP merchant account.", "actor": "Scammer", "evidenceSnippet": "A/C: 123456789012", "severity": "HIGH" },
+        { "stepNumber": 4, "phase": "Capital Extraction", "title": "Wire Transfer of ₹4,80,000", "timestamp": "12:10 PM", "description": "Victim transferred entire savings to designated mule account.", "actor": "Victim (Deceived)", "evidenceSnippet": "IMPS Transfer to State Bank A/C 123456789012", "severity": "CRITICAL" },
+        { "stepNumber": 5, "phase": "Exit Scam & Laundering", "title": "Account Freeze & USDT Crypto Conversion", "timestamp": "12:45 PM", "description": "Syndicate routed ₹4,80,000 to crypto wallet 0x71C8363820912BF821389028198301823901949b.", "actor": "Crypto Laundering Desk", "evidenceSnippet": "Ethereum Tx Hash 0xa9f8...12c", "severity": "CRITICAL" }
+      ],
+      "linkedCases": [
+        {
+          "targetCaseId": "104",
+          "targetCaseNumber": "Case #104",
+          "targetTitle": "NetBanking KYC Expiry Phishing & Unauthorized Siphon",
+          "similarityScore": 0.89,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012", "Identical Origin IP: 185.220.101.5"]
+        },
+        {
+          "targetCaseId": "117",
+          "targetCaseNumber": "Case #117",
+          "targetTitle": "UPI QR Scam - Defense Personnel Impersonation",
+          "similarityScore": 0.85,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012"]
+        }
+      ]
+    },
+    {
+      "id": "135",
+      "caseNumber": "Case #135",
+      "title": "Illegal Instant Loan App & Blackmail Extortion",
+      "crimeType": "Loan App / Cyber Extortion",
+      "status": "Active Investigation",
+      "riskScore": 79,
+      "riskTier": "HIGH",
+      "financialLoss": 85000,
+      "location": "Pune, Maharashtra",
+      "complainant": "Anand Joshi",
+      "incidentDate": "2026-03-22T08:00:00Z",
+      "investigatingOfficer": "Insp. S. More",
+      "legalSections": ["IT Act Sec 66E", "IT Act Sec 67", "BNS Sec 308 (Extortion)"],
+      "description": "Complainant installed 'SpeedRupee' APK outside Google Play. App exfiltrated contact book and gallery. Scammers morphed complainant photos and threatened contacts unless ₹85,000 paid to quickloan@okhdfcbank.",
+      "evidenceText": "APK: SpeedRupee.apk. Extortion calls from +91-9876543210. Beneficiary UPI: quickloan@okhdfcbank. Alternate Bank: 123456789012. Amount: ₹85,000.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012", "998877665544"],
+        "upiIds": ["quickloan@okhdfcbank", "abc@upi"],
+        "emails": ["speedrupee-support@loan-hub.asia"],
+        "ipAddresses": ["185.220.101.9"],
+        "urls": ["https://speedrupee-apk-download.com"],
+        "cryptoWallets": [],
+        "amounts": [85000],
+        "ifscCodes": ["HDFC0001892"]
+      },
+      "linkedCases": [
+        {
+          "targetCaseId": "104",
+          "targetCaseNumber": "Case #104",
+          "targetTitle": "NetBanking KYC Expiry Phishing",
+          "similarityScore": 0.82,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Mule Bank A/C: 123456789012", "Shared SIM: +919876543210"]
+        }
+      ]
+    },
+    {
+      "id": "142",
+      "caseNumber": "Case #142",
+      "title": "Crypto P2P Hawala & Layering Network",
+      "crimeType": "Cryptocurrency Laundering",
+      "status": "Escalated to ED/FIU",
+      "riskScore": 95,
+      "riskTier": "HIGH",
+      "financialLoss": 650000,
+      "location": "Hyderabad, Telangana",
+      "complainant": "Kishore Reddy",
+      "incidentDate": "2026-03-21T15:20:00Z",
+      "investigatingOfficer": "DSP V. Rao (Telangana Cyber Security Bureau)",
+      "legalSections": ["PMLA Sec 3", "IT Act Sec 66D", "BNS Sec 318(4)"],
+      "description": "Proceeds from multiple cyber frauds pooled into Bank Account 123456789012 and converted via Binance P2P into USDT, sent to Ethereum address 0x71C8363820912BF821389028198301823901949b.",
+      "evidenceText": "P2P merchant trade #90812. Beneficiary Bank A/C: 123456789012. Wallet: 0x71C8363820912BF821389028198301823901949b. Originating Server IP: 185.220.101.5. Disputed volume: ₹6,50,000.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012"],
+        "upiIds": ["p2pmerchant@okaxis"],
+        "emails": ["crypto-desk@binance-p2p-mules.com"],
+        "ipAddresses": ["185.220.101.5"],
+        "urls": [],
+        "cryptoWallets": ["0x71C8363820912BF821389028198301823901949b"],
+        "amounts": [650000],
+        "ifscCodes": ["SBIN0004321"]
+      },
+      "linkedCases": [
+        {
+          "targetCaseId": "126",
+          "targetCaseNumber": "Case #126",
+          "targetTitle": "Telegram Work-From-Home Task Investment Fraud",
+          "similarityScore": 0.94,
+          "linkType": "Direct Link",
+          "reasons": ["Shared Crypto Laundering Wallet: 0x71C8...49b", "Identical Origin IP: 185.220.101.5"]
+        }
+      ]
+    },
+    {
+      "id": "158",
+      "caseNumber": "Case #158",
+      "title": "Electricity Bill Arrears Disconnection Phishing",
+      "crimeType": "Utility Impersonation Fraud",
+      "status": "Active Investigation",
+      "riskScore": 68,
+      "riskTier": "MEDIUM",
+      "financialLoss": 72000,
+      "location": "Kolkata, West Bengal",
+      "complainant": "Mitali Ghosh",
+      "incidentDate": "2026-03-20T19:45:00Z",
+      "investigatingOfficer": "SI A. Banerjee",
+      "legalSections": ["IT Act Sec 66D", "BNS Sec 318(4)"],
+      "description": "Threat actor sent SMS warning power will be disconnected at 9:30 PM due to unpaid electricity bill. Instructed victim to install QuickSupport APK, allowing remote device takeover and draining ₹72,000 via UPI abc@upi.",
+      "evidenceText": "SMS sender: WB-POWER. Caller: +91-9876543210. Destination UPI: abc@upi. Bank Account: 123456789012. Amount: ₹72,000.",
+      "entities": {
+        "phoneNumbers": ["+919876543210"],
+        "bankAccounts": ["123456789012"],
+        "upiIds": ["abc@upi"],
+        "emails": ["wbseb-billing@support-power.org"],
+        "ipAddresses": ["185.220.101.12"],
+        "urls": ["https://quicksupport-power-update.com"],
+        "cryptoWallets": [],
+        "amounts": [72000],
+        "ifscCodes": ["SBIN0004321"]
+      },
+      "linkedCases": [
+        {
+          "targetCaseId": "104",
+          "targetCaseNumber": "Case #104",
+          "targetTitle": "NetBanking KYC Expiry Phishing",
+          "similarityScore": 0.91,
+          "linkType": "Direct Link",
+          "reasons": ["Direct UPI ID Match: abc@upi", "Shared Phone Number: +919876543210"]
+        }
+      ]
+    }
+  ],
+  "geospatialHotspots": [
+    { "name": "Delhi NCR (Dwarka / Rohini)", "lat": 28.6139, "lng": 77.2090, "cases": 342, "syndicate": "NetBanking Phishing & Sim Swap", "risk": "Critical" },
+    { "name": "Jamtara - Deoghar Belt", "lat": 23.9576, "lng": 86.8029, "cases": 285, "syndicate": "Bank KYC & Remote Screen Takeover", "risk": "Critical" },
+    { "name": "Mewat - Bharatpur Corridor", "lat": 27.5330, "lng": 76.9926, "cases": 240, "syndicate": "OLX / Army Impersonation & Sextortion", "risk": "Critical" },
+    { "name": "Bengaluru Tech Corridor", "lat": 12.9716, "lng": 77.5946, "cases": 189, "syndicate": "Telegram Investment & Crypto Laundering", "risk": "High" },
+    { "name": "Mumbai Financial Hub", "lat": 19.0760, "lng": 72.8777, "cases": 112, "syndicate": "Corporate Wire & Mule A/C Networks", "risk": "High" },
+    { "name": "Hyderabad Cyber Crime Cell", "lat": 17.3850, "lng": 78.4867, "cases": 80, "syndicate": "Loan App Harassment & P2P Hawala", "risk": "High" }
+  ]
+}

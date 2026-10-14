@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  cybertrace-x:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cybertrace-x-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+    volumes:
+      - ./server/uploads:/app/server/uploads

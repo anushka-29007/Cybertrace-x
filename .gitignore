@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Uploaded evidence runtime files
+server/uploads/*
+!server/uploads/.gitkeep
